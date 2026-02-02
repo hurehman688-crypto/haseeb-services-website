@@ -11,8 +11,8 @@ export default function Portfolio() {
     {
       client: 'Lumina Home Decor',
       type: 'Lead Generation',
-      title: 'Project Title',
-      description: 'Short description of what we delivered and the result (e.g., leads booked, conversion rate, cost per lead).',
+      title: 'High-Converting Lead Gen System',
+      description: 'Implemented a targeted lead generation strategy resulting in 150+ qualified leads and a 30% increase in sales within 3 months.',
       image: '/projects/lead-gen.png',
     },
     {
