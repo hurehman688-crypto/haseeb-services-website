@@ -42,7 +42,6 @@ export default function Services() {
   return (
     <>
       {/* Hero Section */}
-      {/* Hero Section */}
       <section className="text-white text-center py-24 md:py-32 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at 30% 50%, rgba(40, 167, 69, 0.1) 0%, transparent 50%)' }} />
         <div className="container relative z-10">
@@ -57,28 +56,27 @@ export default function Services() {
       {/* Services Grid */}
       <section className="py-20">
         <div className="container">
-          <h2 className="text-center mb-4">What We Can Do For You</h2>
-          <p className="text-center text-slate-300 max-w-2xl mx-auto mb-12">
-            Explore our comprehensive range of services designed to help your business grow, scale, and operate more efficiently.
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <h2 className="text-center mb-12 text-white">Our Core Services</h2>
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {services.map((service) => (
-              <Link
+              <div
                 key={service.slug}
-                href={`/services/${service.slug}`}
-                className="bg-white/5 backdrop-blur-md p-8 rounded-xl shadow-lg hover:bg-white/10 hover:-translate-y-2 transition-all duration-300 border border-white/10 group"
+                className="bg-white/5 backdrop-blur-md p-8 rounded-xl shadow-lg hover:bg-white/10 hover:-translate-y-2 transition-all duration-300 border border-white/10 group flex flex-col items-center text-center"
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-secondary to-primary rounded-xl flex items-center justify-center text-white mb-6 shadow-md group-hover:scale-110 transition-transform">
                   {getIcon(service.icon)}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors">
+                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-accent transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-slate-300 leading-relaxed mb-4">{service.shortDescription}</p>
-                <span className="text-accent font-semibold group-hover:underline">
-                  Learn More →
-                </span>
-              </Link>
+                <p className="text-slate-300 leading-relaxed mb-8">{service.shortDescription}</p>
+                <Link
+                  href={`/services/${service.slug}`}
+                  className="mt-auto px-6 py-2 border border-white/30 rounded-full text-white hover:bg-white hover:text-primary transition-all font-semibold"
+                >
+                  View Details
+                </Link>
+              </div>
             ))}
           </div>
         </div>

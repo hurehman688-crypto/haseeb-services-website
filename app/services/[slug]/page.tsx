@@ -39,7 +39,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const service = getServiceBySlug(params.slug);
-  
+
   if (!service) {
     return {
       title: 'Service Not Found | Growth Leder',
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default function ServiceDetailPage({ params }: { params: { slug: string } }) {
   const service = getServiceBySlug(params.slug);
-  
+
   if (!service) {
     notFound();
   }
@@ -97,29 +97,22 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
               {service.fullDescription}
             </p>
 
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div>
-                <h3 className="mb-4">Key Features</h3>
-                <ul className="space-y-3">
-                  {service.features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <span className="text-secondary font-bold text-xl mt-1">✓</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className="mb-4">Typical Work</h3>
-                <ul className="space-y-3">
-                  {service.typicalWork.map((work, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <span className="text-accent font-bold text-xl mt-1">•</span>
-                      <span>{work}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            {/* Service Features Grid */}
+            <div className="mb-12">
+              <h3 className="mb-6 flex items-center justify-center gap-2 text-2xl">
+                <span className="p-2 bg-secondary/10 rounded-lg text-secondary">
+                  <ClipboardIcon className="w-6 h-6" />
+                </span>
+                Types of Work
+              </h3>
+              <ul className="grid md:grid-cols-2 gap-4">
+                {service.features.map((feature, index) => (
+                  <li key={index} className="flex items-start gap-3 p-4 bg-white/50 rounded-lg border border-primary/5 hover:border-secondary/30 transition-all">
+                    <span className="text-secondary font-bold mt-1">✓</span>
+                    <span className="font-medium text-dark">{feature}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -137,10 +130,6 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
                   alt={`${service.sampleProject.title} - ${service.title} project example showcasing lead generation services and virtual assistant support`}
                   fill
                   className="object-cover"
-                  onError={(e) => {
-                    const target = e.currentTarget;
-                    target.style.display = 'none';
-                  }}
                 />
                 <div className="absolute inset-0 bg-primary/20 flex items-center justify-center">
                   <div className="text-center text-white p-8">

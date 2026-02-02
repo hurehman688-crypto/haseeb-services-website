@@ -34,19 +34,19 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
-          ? 'bg-primary/80 backdrop-blur-xl border-b border-white/10 py-3 shadow-2xl'
+          ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200 py-3 shadow-sm'
           : 'bg-transparent py-6'
           }`}
       >
         <div className="container">
           <div className="flex justify-between items-center">
-            <Link href="/" className="flex items-center gap-3 text-white text-2xl md:text-3xl font-bold hover:scale-105 transition-transform">
-              <Image src="/logo-white.svg" alt="Growth Leder Logo" width={60} height={60} className="w-12 h-12 md:w-16 md:h-16" />
+            <Link href="/" className="flex items-center gap-3 text-black text-2xl md:text-3xl font-bold font-nunito hover:scale-105 transition-transform">
+              <Image src="/logo.svg" alt="Growth Leder Logo" width={60} height={60} className="w-12 h-12 md:w-16 md:h-16" />
               Growth Leder
             </Link>
             <button
               onClick={toggleMenu}
-              className="md:hidden border-2 border-white/30 text-white p-2 rounded-md hover:border-accent hover:bg-accent/10 transition-all"
+              className="md:hidden border-2 border-black/30 text-black p-2 rounded-md hover:border-accent hover:bg-accent/10 transition-all"
               aria-label="Toggle menu"
             >
               <MenuIcon className="w-6 h-6" />
@@ -56,7 +56,7 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative text-white/80 font-medium transition-all hover:text-white ${pathname === link.href ? 'text-white' : ''
+                  className={`relative text-black/80 font-bold transition-all hover:text-black ${pathname === link.href ? 'text-black' : ''
                     }`}
                 >
                   {link.label}
@@ -72,15 +72,17 @@ export default function Header() {
             </Link>
           </div>
         </div>
-      </header>
+      </header >
 
       {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] md:hidden"
-          onClick={closeMenu}
-        />
-      )}
+      {
+        isMenuOpen && (
+          <div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] md:hidden"
+            onClick={closeMenu}
+          />
+        )
+      }
 
       {/* Mobile Menu */}
       <nav

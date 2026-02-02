@@ -18,6 +18,7 @@ module.exports = {
       fontFamily: {
         heading: ['Poppins', 'sans-serif'],
         body: ['Open Sans', 'sans-serif'],
+        nunito: ['var(--font-nunito)', 'sans-serif'],
       },
       boxShadow: {
         'sm': '0 2px 8px rgba(0, 0, 0, 0.08)',
