@@ -1,78 +1,26 @@
-# PowerShell script to push to GitHub
-# Make sure Git is installed first: https://git-scm.com/download/win
 
-Write-Host "GitHub Push Script" -ForegroundColor Green
-Write-Host "===================" -ForegroundColor Green
-Write-Host ""
+# Script to push to GitHub
+# Run this in PowerShell
 
-# Check if git is available
-try {
-    $gitVersion = git --version
-    Write-Host "Git found: $gitVersion" -ForegroundColor Green
-} catch {
-    Write-Host "ERROR: Git is not installed or not in PATH" -ForegroundColor Red
-    Write-Host "Please install Git from: https://git-scm.com/download/win" -ForegroundColor Yellow
-    Write-Host ""
-    Write-Host "After installing Git, restart PowerShell and run this script again." -ForegroundColor Yellow
-    exit 1
+$username = "hurehman688-crypto"
+$repo = "haseeb-services-website"
+$token = "YOUR_TOKEN_HERE" 
+
+# Build remote URL
+$remoteUrl = "https://$($username):$($token)@github.com/$username/$repo.git"
+
+Write-Host "Setting remote to: $repo"
+git remote remove origin
+git remote add origin $remoteUrl
+git branch -M main
+
+Write-Host "Pushing to GitHub..."
+git push -u origin main
+
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "Successfully pushed to GitHub!" -ForegroundColor Green
 }
-
-# Check if .git exists
-if (Test-Path ".git") {
-    Write-Host "Git repository already initialized" -ForegroundColor Green
-} else {
-    Write-Host "Initializing Git repository..." -ForegroundColor Yellow
-    git init
-    Write-Host "Git repository initialized" -ForegroundColor Green
+else {
+    Write-Host "Push failed. Please check your token permissions." -ForegroundColor Red
+    Write-Host "Ensure the token has 'Contents' -> 'Read and Write' permission."
 }
-
-# Add all files
-Write-Host ""
-Write-Host "Adding all files..." -ForegroundColor Yellow
-git add .
-
-# Check if there are changes to commit
-$status = git status --porcelain
-if ($status) {
-    Write-Host "Files staged for commit" -ForegroundColor Green
-    
-    # Commit
-    Write-Host ""
-    Write-Host "Creating commit..." -ForegroundColor Yellow
-    $commitMessage = "Update: Add testimonials page, update README with GitHub URL, improve push script"
-    git commit -m $commitMessage
-    Write-Host "Commit created successfully" -ForegroundColor Green
-    
-    # Check for remote
-    $remote = git remote -v
-    if ($remote) {
-        Write-Host ""
-        Write-Host "Remote repository found:" -ForegroundColor Green
-        Write-Host $remote
-        
-        Write-Host ""
-        Write-Host "Pushing to GitHub..." -ForegroundColor Yellow
-        git branch -M main
-        git push -u origin main
-        Write-Host ""
-        Write-Host "Successfully pushed to GitHub!" -ForegroundColor Green
-    } else {
-        Write-Host ""
-        Write-Host "No remote repository configured" -ForegroundColor Yellow
-        Write-Host ""
-        Write-Host "Adding remote: https://github.com/xneshaniy/haseeb-services-website.git" -ForegroundColor Cyan
-        git remote add origin https://github.com/xneshaniy/haseeb-services-website.git
-        Write-Host ""
-        Write-Host "Pushing to GitHub..." -ForegroundColor Yellow
-        git branch -M main
-        git push -u origin main
-        Write-Host ""
-        Write-Host "Successfully pushed to GitHub!" -ForegroundColor Green
-    }
-} else {
-    Write-Host "No changes to commit" -ForegroundColor Yellow
-    Write-Host "All files are already committed" -ForegroundColor Green
-}
-
-Write-Host ""
-Write-Host "Done!" -ForegroundColor Green
